@@ -1,3 +1,4 @@
+from itertools import chain
 from tkinter import *
 from click import command
 
@@ -15,33 +16,74 @@ class la_data():
 def add_data():
     a =zone_num.get()
     data = la_data(a)
-    
+def del_da():
+    zone_num.delete(0,END)
+    dico.clear()
+def cont():
+    if not dico and  not zone_num.get():
+        del_da()   
 def num_9():
+    cont()
     zone_num.insert(END,9)
-    a = zone_num.get()
-    print(a)
-    print(type(a))
+
 
 def num_8():
+    cont()
     zone_num.insert(END,8)
 def num_7():
+    cont()
     zone_num.insert(END,7)
 def num_6():
+    cont()
     zone_num.insert(END,6)
 def num_5():
+    cont()
     zone_num.insert(END,5)
 def num_4():
+    cont()
     zone_num.insert(END,4)
 def num_3():
+    cont()
     zone_num.insert(END,3)
 def num_2():
+    cont()
     zone_num.insert(END,2)
 def num_1():
+    cont()
     zone_num.insert(END,1)
 def num_0():
+    cont()
     zone_num.insert(END,0)
 def num_p():
+    cont()
     zone_num.insert(END,".")
+dico={}
+def del_info():
+    
+    chaine = zone_num.get()
+    zone_num.delete(0,END)
+    position =int(dico["plus"][1])
+    print(chaine[-2])
+    if chaine[position]== "+":
+
+        resul = int(dico["plus"][0]) + int(chaine[position:])
+   
+    zone_num.insert(END,resul)
+    dico.clear()
+
+def plus():
+    a = zone_num.get()
+
+    if not dico:
+        t =( a, len(a))
+        dico["plus"]=t
+    elif dico:
+        position= dico["plus"][-1]
+        t = (a[position:],len(a))
+        som= int(dico["plus"][0])+int(t[0])
+        dico["plus"]= (som,t[1])
+    zone_num.insert(END,"+")
+    
 
     
 #Personalisation de la fenetre
@@ -69,13 +111,13 @@ titre.pack(pady=12)
 zone_num= Entry(myframe1,font=("Foco Black",38), bg= "#B8CBD0", fg="white")
 zone_num.pack()
 #Mes fonctions 
-bot_C = Button(ligne1, text="C" , font=("Foco Black",28), bg="white",fg = "#B8CBD0")
+bot_C = Button(ligne1, text="C" , font=("Foco Black",28), bg="white",fg = "#B8CBD0" , command=del_da)
 bot_C.grid(row=0,column=0, pady=5,padx=5)
 bot_carre = Button(ligne1, text="x²" , font=("Foco Black",28), bg="white",fg = "#B8CBD0")
 bot_carre.grid(row=0,column=1,pady=5,padx=5)
 bot_racine = Button(ligne1, text="√", font=("Foco Black",28), bg="white",fg = "#B8CBD0")
 bot_racine.grid(row=0,column=2,pady=5,padx=5)
-bot_plus = Button(ligne1, text="+", font=("Foco Black",28), bg="white",fg = "#B8CBD0",  command= generate)
+bot_plus = Button(ligne1, text="+", font=("Foco Black",28), bg="white",fg = "#B8CBD0",  command= plus)
 bot_plus.grid(row=0,column=3,pady=5,padx=5)
 
 
@@ -110,7 +152,7 @@ bot_0 = Button(ligne5, text="0" , font=("Foco Black",30), bg="white",fg = "#B8CB
 bot_0.grid(row=4,column=1,pady=5,padx=5)
 bot_vir = Button(ligne5, text=",", font=("Foco Black",30), bg="white",fg = "#B8CBD0")
 bot_vir.grid(row=4,column=2,pady=5,padx=5)
-bot_egal = Button(ligne5, text="=", font=("Foco Black",30), bg="white",fg = "#B8CBD0")
+bot_egal = Button(ligne5, text="=", font=("Foco Black",30), bg="white",fg = "#B8CBD0", command=del_info)
 bot_egal.grid(row=4,column=3,columnspan=3,pady=5,padx=5)
  
 
