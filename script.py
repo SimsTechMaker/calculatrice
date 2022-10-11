@@ -7,13 +7,21 @@ from pyparsing import col
 window = Tk()
 def generate():
     zone_num.insert(0,"'000000000'")
+class la_data():
+    def __init__(self, data) -> None:
+        self.data= data
+    def add(self):
+        pass
+def add_data():
+    a =zone_num.get()
+    data = la_data(a)
     
 def num_9():
     zone_num.insert(END,9)
     a = zone_num.get()
     print(a)
     print(type(a))
-    
+
 def num_8():
     zone_num.insert(END,8)
 def num_7():
