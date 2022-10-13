@@ -1,5 +1,6 @@
 from itertools import chain
 from tkinter import *
+from turtle import pos
 from click import command
 
 from numpy import full
@@ -25,7 +26,6 @@ def cont():
 def num_9():
     cont()
     zone_num.insert(END,9)
-
 
 def num_8():
     cont()
@@ -59,14 +59,17 @@ def num_p():
     zone_num.insert(END,".")
 dico={}
 def del_info():
+    print (zone_num.get())
     
     chaine = zone_num.get()
     zone_num.delete(0,END)
     position =int(dico["plus"][1])
     print(chaine[-2])
-    if chaine[position]== "+":
+    if chaine[position]== "+" or chaine[position]== "-" :
 
         resul = int(dico["plus"][0]) + int(chaine[position:])
+
+        
    
     zone_num.insert(END,resul)
     dico.clear()
@@ -83,6 +86,19 @@ def plus():
         som= int(dico["plus"][0])+int(t[0])
         dico["plus"]= (som,t[1])
     zone_num.insert(END,"+")
+def moins():
+    a = zone_num.get()
+    if not dico :
+        t= (a, len(a))
+        dico["plus"]=t
+    elif dico:
+        position = dico["plus"][-1]
+        t = (a[position:], len(a))
+        moins = int(dico["plus"][0])-int(t[0])
+        print(moins)
+        dico["plus"]= (moins,t[1])
+    zone_num.insert(END,"-")
+        
     
 
     
@@ -127,7 +143,7 @@ bot_8 = Button(ligne2, text="8" , font=("Foco Black",30), bg="white",fg = "#B8CB
 bot_8.grid(row=1,column=1,pady=5,padx=5)
 bot_9 = Button(ligne2, text="9" , font=("Foco Black",30), bg="white",fg = "#B8CBD0",command= num_9)
 bot_9.grid(row=1,column=2,pady=5,padx=5)
-bot_moins = Button(ligne2, text="-", font=("Foco Black",30), bg="white",fg = "#B8CBD0")
+bot_moins = Button(ligne2, text="-", font=("Foco Black",30), bg="white",fg = "#B8CBD0", command=moins)
 bot_moins.grid(row=1,column=3,pady=5,padx=5)
 
 bot_4 = Button(ligne3, text="4" , font=("Foco Black",30), bg="white",fg = "#B8CBD0",command= num_4)
