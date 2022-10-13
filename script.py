@@ -68,6 +68,8 @@ def del_info():
     if chaine[position]== "+" or chaine[position]== "-" :
 
         resul = int(dico["plus"][0]) + int(chaine[position:])
+    if chaine[position]== "*":
+        resul = int(dico["plus"][0]) * int(chaine[position+1:])
 
         
    
@@ -94,14 +96,28 @@ def moins():
     elif dico:
         position = dico["plus"][-1]
         t = (a[position:], len(a))
-        moins = int(dico["plus"][0])-int(t[0])
+        moins = int(dico["plus"][0])+int(t[0])
         print(moins)
         dico["plus"]= (moins,t[1])
     zone_num.insert(END,"-")
         
     
-
-    
+def multi():
+    a = zone_num.get()
+    if not dico:
+        t = (a,len(a))
+        dico["plus"]=t
+    elif dico:
+        position = dico["plus"][-1]
+        t = (a[position+1:],len(a))
+        if t[0]!= 0:
+            multi = int(dico["plus"][0])*int(t[0])
+            dico["plus"]= (multi,t[1])
+    zone_num.insert(END,"*")
+            
+            
+        
+                
 #Personalisation de la fenetre
 window.title("Calculatrice")
 window.geometry("400x620")
@@ -161,7 +177,7 @@ bot_2 = Button(ligne4, text="2" , font=("Foco Black",30), bg="white",fg = "#B8CB
 bot_2.grid(row=3,column=1,pady=5,padx=5)
 bot_3 = Button(ligne4, text="3" , font=("Foco Black",30), bg="white",fg = "#B8CBD0",command= num_3)
 bot_3.grid(row=3,column=2,pady=5,padx=5)
-bot_mul = Button(ligne4, text="x", font=("Foco Black",30), bg="white",fg = "#B8CBD0")
+bot_mul = Button(ligne4, text="x", font=("Foco Black",30), bg="white",fg = "#B8CBD0",command=multi)
 bot_mul.grid(row=3,column=3,pady=5,padx=5)
 
 bot_0 = Button(ligne5, text="0" , font=("Foco Black",30), bg="white",fg = "#B8CBD0",command= num_0)
