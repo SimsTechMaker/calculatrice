@@ -1,4 +1,4 @@
-# Calculatrice by SimsTechMaker en python 
+# Calculatrice en python 
 
 ## Capture 
-![Capture](https://user-images.githubusercontent.com/104359762/195143390-0c9d4a77-6e79-4153-ab20-4dd8f17b6a4d.gif)
+![Vidéo sans titre ‐ Réalisée avec Clipchamp (4)](https://user-images.githubusercontent.com/104359762/195652268-73274b8c-1457-489a-99b8-d47099d5e846.gif)

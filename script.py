@@ -1,10 +1,7 @@
-from itertools import chain
 from tkinter import *
-from turtle import pos, position
 from click import command
 
-from numpy import full
-from pyparsing import col
+
 
 window = Tk()
 def generate():
@@ -58,6 +55,7 @@ def num_p():
     cont()
     zone_num.insert(END,".")
 dico={}
+
 def del_info():
     print (zone_num.get())
     
@@ -66,50 +64,47 @@ def del_info():
     position =int(dico["plus"][1])
     print(chaine[-2])
     if chaine[position]== "+" or chaine[position]== "-" :
-
         resul = int(dico["plus"][0]) + int(chaine[position:])
     elif chaine[position]== "*":
         resul = int(dico["plus"][0]) * int(chaine[position+1:])
     elif chaine[position]== "/":
         resul = int(dico["plus"][0]) / int(chaine[position+1:])
-        
-    
-        
-   
     zone_num.insert(END,resul)
     dico.clear()
 
+def verif(a):
+    t =( a, len(a))
+    dico["plus"]=t
+      
 def plus():
     a = zone_num.get()
 
     if not dico:
-        t =( a, len(a))
-        dico["plus"]=t
+        verif(a)
     elif dico:
         position= dico["plus"][-1]
         t = (a[position:],len(a))
         som= int(dico["plus"][0])+int(t[0])
         dico["plus"]= (som,t[1])
     zone_num.insert(END,"+")
+    
 def moins():
     a = zone_num.get()
-    if not dico :
-        t= (a, len(a))
-        dico["plus"]=t
+    if not dico :        
+        verif(a)
+
     elif dico:
         position = dico["plus"][-1]
         t = (a[position:], len(a))
         moins = int(dico["plus"][0])+int(t[0])
         print(moins)
         dico["plus"]= (moins,t[1])
-    zone_num.insert(END,"-")
-        
+    zone_num.insert(END,"-") 
     
 def multi():
     a = zone_num.get()
-    if not dico:
-        t = (a,len(a))
-        dico["plus"]=t
+    if not dico:        
+        verif(a)
     elif dico:
         position = dico["plus"][-1]
         t = (a[position+1:],len(a))
@@ -117,13 +112,11 @@ def multi():
             multi = int(dico["plus"][0])*int(t[0])
             dico["plus"]= (multi,t[1])
     zone_num.insert(END,"*")
-            
-            
+                 
 def divi():
     a = zone_num.get()
-    if not dico :
-        t = (a,len(a))
-        dico["plus"]=t
+    if not dico :        
+        verif(a)
     elif dico :
         position = dico ["plus"][-1]
         t = (a[position+1:],len(a))
